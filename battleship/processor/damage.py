@@ -1,5 +1,6 @@
-import esper
+from math import sqrt
 
+import esper
 from battleship.component import Hazard, Health, Position
 from battleship.config import logger
 from battleship.utils import Status, get_distance  # noqa: F401
@@ -55,14 +56,18 @@ def get_damage(
     """
 
     # Compute distance from ship to hazard
-    # <!!! INSERT YOUR CODE HERE !!!>
+    distance = sqrt(
+        (ship_position.x - hazard_position.x) ** 2
+        + (ship_position.y - hazard_position.y) ** 2
+    )
 
     # Check if ship is safe from hazard
-    # <!!! INSERT YOUR CODE HERE !!!>
+    if distance >= hazard.safe_dist:
+        return 0
 
     # Compute the actual damage
-    # <!!! INSERT YOUR CODE HERE !!!>
+    damage = (hazard.safe_dist - distance) / hazard.safe_dist
 
     # Return the damage you computed
     # <!!! REPLACE THE LINE BELLOW WITH YOUR OWN !!!>
-    return 0
+    return damage
